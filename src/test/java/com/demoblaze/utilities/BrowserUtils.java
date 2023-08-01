@@ -1,4 +1,4 @@
-package com.kraftech.utilities;
+package com.demoblaze.utilities;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
@@ -140,7 +140,7 @@ public class BrowserUtils {
      */
     public static WebElement waitForClickablility(WebElement element, int timeout) {
         WebDriverWait wait = new WebDriverWait(Driver.get(), timeout);
-        //WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(20));
+        //WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(20));//Selenium 4 için
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
