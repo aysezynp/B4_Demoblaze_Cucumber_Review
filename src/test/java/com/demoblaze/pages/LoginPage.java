@@ -3,6 +3,7 @@ package com.demoblaze.pages;
 import com.demoblaze.utilities.BrowserUtils;
 import com.demoblaze.utilities.ConfigurationReader;
 import com.demoblaze.utilities.Driver;
+import org.junit.Assert;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -22,25 +23,31 @@ public class LoginPage extends BasePage{
     @FindBy(css = "[onclick='logIn()']")
     public WebElement submitBtn;
 
-    public void login(){
-        loginHomePage.click();
-        input_loginusername.sendKeys(ConfigurationReader.get("username"));
-        input_loginpassword.sendKeys(ConfigurationReader.get("password"));
-        submitBtn.click();
-        BrowserUtils.waitFor(2);
-    }
+    public void login() {
+        String username = ConfigurationReader.get("username");
+        String password = ConfigurationReader.get("password");
 
-    public void login(String username,String password){
         loginHomePage.click();
         input_loginusername.sendKeys(username);
         input_loginpassword.sendKeys(password);
         submitBtn.click();
         BrowserUtils.waitFor(2);
+    }
 
+    public void login(String username, String password) {
+        loginHomePage.click();
+        input_loginusername.sendKeys(username);
+        input_loginpassword.sendKeys(password);
+        submitBtn.click();
+        BrowserUtils.waitFor(2);
     }
-    public String getWarningMessage(){
-     Alert alert=Driver.get().switchTo().alert();
-     String message= alert.getText();
-     return message;
+
+    public void verifyWithPopUpMessage(String expectedMessage){
+        Alert alert= Driver.get().switchTo().alert();
+        String actualMessage=alert.getText();
+        System.out.println("actualMessage = " + actualMessage);
+        Assert.assertEquals(expectedMessage,actualMessage);
     }
+
+
 }
